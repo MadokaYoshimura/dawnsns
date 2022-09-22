@@ -20,24 +20,50 @@
 
 
 //ログアウト中のページ
-Route::get('/login', 'Auth\LoginController@login');
+// ログイン画面
+Route::get('/login', 'Auth\LoginController@login')->name('login');
 Route::post('/login', 'Auth\LoginController@login');
 
+// 新規会員登録画面
 Route::get('/register', 'Auth\RegisterController@register');
 Route::post('/register', 'Auth\RegisterController@register');
 
+// 登録後の画面
 Route::get('/added', 'Auth\RegisterController@added');
 
 
+
 //ログイン中のページ
-Route::get('/top','PostsController@index');
+Route::group(['middleware' => 'auth'], function () {
+  // トップページの表示
+  Route::get('/top', 'PostsController@index');
+  // つぶやきの投稿機能
+  Route::post('/top', 'PostsController@create');
 
-Route::get('/profile','UsersController@profile');
+  // 投稿の編集
+  // Route::get('/post/{id}/post-update', 'PostsController@postUpdateForm')->name('post-update');
+  Route::post('/post/update', 'PostsController@postUpdate');
 
-Route::get('/search','UsersController@index');
+  // 投稿の削除
+  Route::get('/post/{id}/delete', 'PostsController@delete');
 
-Route::get('/follow-list','PostsController@index');
-Route::get('/follower-list','PostsController@index');
+  // プロフィールの表示
+  Route::get('/profile/{id}', 'UsersController@profile')->name('profile');
+  // プロフィールの編集
+  Route::get('/profile/{id}/profile-update', 'UsersController@profileUpdateForm')->name('profile-update');
+  Route::post('/profile/update', 'UsersController@profileUpdate');
 
+  // フォロー・リムーブ機能
+  Route::get('/follow/{id}', 'FollowsController@follow');
+  Route::get('/remove/{id}', 'FollowsController@remove');
 
+  // 検索機能
+  Route::get('/search', 'UsersController@search');
 
+  // フォロー・フォロワーリストの表示
+  Route::get('/follow-list', 'FollowsController@followList');
+  Route::get('/follower-list', 'FollowsController@followerList');
+
+  // ログアウト機能
+  Route::get('/logout', 'Auth\LoginController@logout');
+});

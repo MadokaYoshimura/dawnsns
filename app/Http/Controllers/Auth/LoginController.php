@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Validator;
+use Hash;
+
 
 class LoginController extends Controller
 {
@@ -38,17 +41,56 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    
-    public function login(Request $request){
-        if($request->isMethod('post')){
-            
-            $data=$request->only('mail','password');
-            // ログインが成功したら、トップページへ
-            //↓ログイン条件は公開時には消すこと
-            if(Auth::attempt($data)){
-                return redirect('/top');
+
+    protected function validator(array $data)
+    {
+        return Validator::make(
+            $data,
+            [
+                'mail' => 'required|string|email',
+                'password' => 'required|alpha_dash',
+            ],
+            [
+                'mail.required' => 'メールアドレスを入力してください',
+                'password.required' => 'パスワードを入力してください',
+            ]
+        );
+    }
+
+
+    public function login(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            // loginページから送られてきた値を変数$dataに格納
+            $data = $request->only('mail', 'password');
+            // ↓バリデーターを使って入力チェック
+            $val = $this->validator($data);
+            if ($val->fails()) {
+                return redirect('login')
+                    ->withErrors($val)
+                    ->withInput();
+            } else {
+                if (Auth::attempt($data)) {
+                    // 現在のパスワードを表示するために文字数をセッションに保存
+                    $request->session()->put('word_count', strlen($request->password));
+                    return redirect('top');
+                } else {
+                    // バリデーション成功後、ログイン失敗した場合
+                    return redirect('login')
+                        ->with('error', 'メールアドレスかパスワードが違います')
+                        ->withInput();
+                }
             }
         }
         return view("auth.login");
+    }
+
+    // ログアウト処理
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
     }
 }
