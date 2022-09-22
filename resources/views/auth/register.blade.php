@@ -2,27 +2,78 @@
 
 @section('content')
 
-{!! Form::open() !!}
+<div class="form-outer">
+  {!! Form::open(['url' => '/register','method'=> 'post']) !!}
 
-<h2>新規ユーザー登録</h2>
+  <h2>新規ユーザー登録</h2>
+  <div class="form-inner">
+    <div class="alert alert-danger form-item">
+      <div class="form-label">
+        {{ Form::label('username','UserName') }}
+      </div>
+      <div class="form-input">
+        {{ Form::text('username',old('username'),['class' => 'input','placeholder'=>'dawntown']) }}
+      </div>
+    </div>
 
-{{ Form::label('ユーザー名') }}
-{{ Form::text('username',null,['class' => 'input']) }}
+    <div class="alert alert-danger form-item">
+      <div class="form-label">
+        {{ Form::label('mail','MailAdress') }}
+      </div>
+      <div class="form-input">
+        {{ Form::email('mail',old('mail'),['class' => 'input','placeholder'=>'dawn@dawn.jp']) }}
+      </div>
+    </div>
 
-{{ Form::label('メールアドレス') }}
-{{ Form::text('mail',null,['class' => 'input']) }}
+    <div class="alert alert-danger form-item">
+      <div class="form-label">
+        {{ Form::label('password','Password') }}
+      </div>
+      <div class="form-input">
+        {{ Form::password('password',null,['class' => 'input']) }}
+      </div>
+    </div>
 
-{{ Form::label('パスワード') }}
-{{ Form::text('password',null,['class' => 'input']) }}
+    <div class="alert alert-danger form-item">
+      <div class="form-label">
+        {{ Form::label('password_confirmation','Password confirm') }}
+      </div>
+      <div class="form-input">
+        {{ Form::password('password_confirmation',null,['class' => 'input']) }}
+      </div>
+    </div>
 
-{{ Form::label('パスワード確認') }}
-{{ Form::text('password-confirm',null,['class' => 'input']) }}
+    @if ($errors->any())
+    <ul class="error-message">
+      @foreach($errors->get('username') as $username)
+      <li>{{ $username }}</li>
+      @endforeach
+    </ul>
+    <ul class="error-message">
+      @foreach($errors->get('mail') as $mail)
+      <li>{{ $mail }}</li>
+      @endforeach
+    </ul>
+    <ul class="error-message">
+      @foreach($errors->get('password') as $password)
+      <li>{{ $password }}</li>
+      @endforeach
+    </ul>
+    <ul class="error-message">
+      @foreach($errors->get('password_confirmation') as $password_confirmation)
+      <li>{{ $password_confirmation }}</li>
+      @endforeach
+    </ul>
+    @endif
 
-{{ Form::submit('登録') }}
+    <div class="form-btn">
+      {{ Form::submit('REGISTER') }}
+    </div>
+  </div>
 
-<p><a href="/login">ログイン画面へ戻る</a></p>
+  <p><a href="/login">ログイン画面へ戻る</a></p>
 
-{!! Form::close() !!}
-
+  {!! Form::close() !!}
+</div>
 
 @endsection

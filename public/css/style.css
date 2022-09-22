@@ -1,22 +1,616 @@
 @charset "utf-8";
-html{
+
+html {
+    font-size: 62.5%;
 }
-body{
+
+body {
+    font-size: 1.4rem;
+    color: #6C6C6C;
 }
+
+a {
+    color: #6c6c6c;
+    text-decoration: none;
+}
+
+img {
+    vertical-align: bottom;
+}
+
+textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    resize: none;
+    background: transparent;
+}
+
+input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: none;
+}
+
+
 /* header */
-header{
-    background:#3C4767;
+#head {
+    background: #3C4867;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    height: 80px;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+#head-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#head-content p {
+    line-height: 80px;
+    color: #fff;
+}
+
+.head-img img {
+    width: 45px;
+    border-radius: 50%;
 }
 
 /* main content */
-#row{
+#row {
     display: flex;
     flex-flow: row wrap;
+    margin-top: 80px;
 }
-#container{
-    flex: 0 0 80%;
+
+#container {
+    flex: 0 0 77%;
 }
-#side-bar{
-    flex: 0 0 19%;
+
+#side-bar {
+    flex: 0 0 23%;
     border-left: 1px solid #6C6C6C;
+    box-sizing: border-box;
+}
+
+/* アコーディオンメニュー */
+.ac-menu {
+    width: 23%;
+    transition: .3s ease-in-out;
+    transform: translateY(0);
+    opacity: 100%;
+    z-index: 50;
+    position: fixed;
+    right: 0;
+    margin-top: 80px;
+}
+
+.ac-menu.close {
+    transform: translateY(-100%);
+}
+
+.ac-menu li a {
+    text-align: center;
+    border-bottom: 1px solid #3C4867;
+    border-right: 1px solid #3C4867;
+    border-left: 1px solid #3C4867;
+    background-color: #fff;
+    height: 50px;
+    line-height: 50px;
+    transition: .3s;
+    display: block;
+}
+
+.ac-menu li a:hover {
+    background-color: #DE563C;
+    color: #fff;
+}
+
+.ac-btn {
+    cursor: pointer;
+    margin: 0 25px 0;
+    display: inline-block;
+    vertical-align: middle;
+    color: #fff;
+    line-height: 1;
+    width: 1em;
+    height: 1em;
+    border: 0.1em solid currentColor;
+    border-left: 0;
+    border-bottom: 0;
+    box-sizing: border-box;
+    transform: translateY(-25%) rotate(135deg);
+    transition: .3s;
+    vertical-align: -1px;
+}
+
+.ac-btn.close {
+    transform: translateY(25%) rotate(-45deg);
+}
+
+/* ----------サイドバー---------- */
+#side-bar {
+    padding: 15px 30px 0 15px;
+}
+
+#confirm {
+    border-bottom: 1px solid #D9D9D9;
+    margin-bottom: 30px;
+}
+
+.side-follows {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    padding: 0 20px;
+}
+
+.btn {
+    text-align: right;
+    margin-bottom: 30px;
+}
+
+.btn a {
+    display: inline-block;
+    padding: 12px 5px;
+    background-color: #3C4867;
+    color: #fff;
+    max-width: 130px;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.btn.user-search {
+    text-align: center;
+}
+
+.btn a:hover, .btn.user-search a:hover {
+    opacity: .8;
+}
+
+/* ----------メインエリア---------- */
+/* 投稿フォーム */
+
+.post-form {
+    width: 100%;
+    display: flex;
+    padding: 20px 20px;
+    box-sizing: border-box;
+}
+
+.profile-img {
+    width: 10%;
+    display: flex;
+    align-items: center;
+}
+
+.profile-img img {
+    border-radius: 50%;
+}
+
+.post-form textarea {
+    padding: 0;
+    border: 0;
+
+    width: 100%;
+    height: 70px;
+    box-sizing: border-box;
+    font-size: 1.6rem;
+}
+
+.post-form textarea::placeholder {
+    color: #EBEBEB;
+}
+
+.post-btn {
+    width: 30%;
+    margin-left: 10px;
+    position: relative;
+}
+
+.post-btn button {
+    border: none;
+    cursor: pointer;
+    background: none;
+    position: absolute;
+    bottom: 0;
+}
+
+.post-btn button img {
+    width: 41px;
+    height: 36px;
+}
+
+.error-message li {
+    color: #DE563C;
+    margin-bottom: 10px;
+}
+
+/* つぶやきリスト */
+#post {
+    border-top: 4px double #6C6C6C;
+}
+
+.post-wrapper {
+    border-bottom: 1px solid #D9D9D9;
+    padding: 25px 40px 10px 40px;
+}
+
+.post-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.post-item {
+    width: 90%;
+}
+
+.post-user {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-content {
+    font-size: 1.6rem;
+    white-space: pre-line;
+}
+
+/* 編集・削除ボタン */
+.post-edit {
+    text-align: right;
+}
+
+.edit-btn img {
+    width: 36px;
+    height: 43px;
+    vertical-align: 5px;
+}
+
+.edit-btn, .delete-btn {
+    background: none;
+    border: none;
+}
+
+.edit-btn a:hover {
+    opacity: .8;
+}
+
+.delete-btn {
+    width: 55px;
+    height: 55px;
+    background: url(../images/trash.png) no-repeat 0 0;
+    font-size: 0;
+}
+
+.delete-btn:hover {
+    background: url(../images/trash_h.png) no-repeat 0 0;
+}
+
+/* ----------フォローリスト---------- */
+.follows-list {
+    padding: 20px 80px;
+}
+
+.follows-list li {
+    display: inline-block;
+    width: auto;
+    margin: 10px 10px;
+}
+
+
+.list-title {
+    font-size: 2.7rem;
+    padding: 20px 0 0 40px;
+}
+
+/* ----------ユーザー検索画面---------- */
+/* 検索フォーム */
+.search-form {
+    width: 100%;
+    padding: 15px 60px;
+}
+
+.search-form input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: 1px solid #707070;
+    border-radius: 5px;
+    font-size: 1.6rem;
+    padding: 10px;
+    max-width: 300px;
+    width: 100%;
+    margin-right: 10px;
+}
+
+.search-btn {
+    border: none;
+    background-color: #3C4867;
+    border-radius: 5px;
+    color: #fff;
+    padding: 5px 10px;
+}
+
+.search-word {
+    display: inline-block;
+    font-size: 1.6rem;
+    margin-left: 100px;
+}
+
+/* 検索結果・ユーザー一覧 */
+.search-result {
+    border-top: 4px double #6C6C6C;
+}
+
+.user-wrapper {
+    padding: 15px 60px;
+}
+
+.user-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-list .profile-img {
+    width: 10%;
+}
+
+.user-name {
+    width: 50%;
+    font-size: 1.8rem;
+}
+
+.follows-btn {
+    width: 40%;
+}
+
+.follows-btn a {
+    display: inline-block;
+    padding: 12px 5px;
+    background-color: #7895D7;
+    color: #fff;
+    max-width: 140px;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.follows-btn.remove a {
+    background-color: #B95656;
+}
+
+.follows-btn a:hover {
+    opacity: .8;
+}
+
+/* ----------プロフィール---------- */
+/* プロフィール内容 */
+.profile-content {
+    padding: 30px 25px 15px 60px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-content .profile-img {
+    width: auto;
+    align-items: start;
+    margin-right: 30px;
+}
+
+.profile-content .profile-detail {
+    width: 60%;
+}
+
+.profile-content .follows-btn {
+    display: flex;
+    align-items: flex-end;
+    justify-content: end;
+}
+
+.profile-item {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.profile-item li:first-of-type {
+    width: 30%;
+}
+
+.profile-detail {
+    font-size: 1.8rem;
+}
+
+/* ----------プロフィール編集---------- */
+
+#profileEdit {
+    padding: 40px 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#profileEdit input, #profileEdit textarea {
+    border-bottom: 3px solid #BEBEBE;
+    background: #F2F2F2;
+}
+
+#profileEdit .profile-img {
+    width: auto;
+    align-items: start;
+}
+
+.profileEdit-wrapper {
+    width: 85%;
+}
+
+.profile-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-list li {
+    margin-bottom: 30px;
+}
+
+.profile-list li:nth-of-type(1) {
+    font-size: 1.8rem;
+    width: 10%;
+}
+
+.profile-list li:nth-of-type(2) {
+    font-size: 1.8rem;
+    width: 70%;
+}
+
+.profile-list li:nth-of-type(2) input {
+    width: 70%;
+    font-size: 1.8rem;
+    color: #6C6C6C;
+    padding: 2px 5px;
+}
+
+.profile-list textarea {
+    width: 70%;
+    font-size: 1.8rem;
+    color: #6C6C6C;
+    padding: 2px 5px;
+    height: 80px;
+}
+
+.profile-btn button {
+    border: none;
+    padding: 10px 50px;
+    font-size: 1.6rem;
+    color: #fff;
+    background-color: #7B9979;
+    border-radius: 5px;
+}
+
+.profile-btn {
+    text-align: center;
+}
+
+.profile-list.file input[type="file"] {
+    display: none;
+}
+
+.profile-list.file label {
+    background-color: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profile-list.file li:nth-of-type(1) {
+    cursor: default;
+}
+
+.profile-list.file li:nth-of-type(2) {
+    padding: 40px 0px;
+    box-sizing: border-box;
+    border-bottom: 3px solid #BEBEBE;
+    background: #F2F2F2;
+    text-align: center;
+}
+
+
+/* 削除モーダル */
+.delete-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 200;
+    background-color: #fff;
+    padding: 25px 40px;
+    width: 35%;
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+.delete-modal p {
+    text-align: left;
+}
+
+.modal-btn {
+    text-align: right;
+}
+
+.modal-execution, .modal-close {
+    display: inline-block;
+    background-color: #7895D7;
+    border: none;
+    max-width: 120px;
+    width: 100%;
+    line-height: 2;
+    color: #fff;
+    border-radius: 7px;
+    letter-spacing: 0.1em;
+    font-size: 1.6rem;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.modal-close {
+    background-color: #fff;
+    color: #6C6C6C;
+    border: 1px solid #6C6C6C;
+    margin-left: 10px;
+}
+
+/* 編集モーダル */
+.edit-modal {
+    display: none;
+    position: fixed;
+    z-index: 200;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.modal-inner {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px 30px;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.modal-content textarea {
+    border: 1px solid #6c6c6c;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 1.6rem;
+    color: #6c6c6c;
+    margin-bottom: 10px;
+    height: 100px;
+}
+
+.btn.edit-btn {
+    margin-bottom: 0;
+}
+
+.length-error {
+    color: #DE563C;
+    text-align-last: left;
+    font-size: 1.6rem;
 }

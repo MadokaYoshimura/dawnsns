@@ -1,9 +1,119 @@
 @chasert "utf-8";
 
-html{
+html {
     height: 100%;
+    font-size: 62.5%;
 }
-body{
+
+body {
     height: 100%;
-    background: #3C4767;
+    color: #fff;
+    background: linear-gradient(#3c4867 55%, #d2553e);
+    font-size: 1.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+a {
+    color: #fff;
+}
+
+/* ロゴ */
+.logo, p {
+    text-align: center;
+}
+
+.sub-title {
+    font-size: 2.7rem;
+    letter-spacing: 0.07em;
+    text-align: center;
+}
+
+/* ログイン・新規登録フォーム */
+.form-outer {
+    width: 88%;
+    background-color: rgba(6, 18, 49, 0.4);
+    padding: 40px;
+    margin-top: 65px;
+}
+
+.form-outer h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.form-inner {
+    margin: 40px 0;
+}
+
+.form-item {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    margin-bottom: 10px;
+}
+
+.form-input input {
+    width: 100%;
+    border-radius: 7px;
+    border: none;
+    padding: 7px 10px;
+    box-sizing: border-box;
+    font-size: 1.6rem;
+}
+
+.error-message li {
+    margin-bottom: 8px;
+}
+
+.form-btn {
+    text-align: right;
+    margin-bottom: 30px;
+}
+
+.form-btn input {
+    background-color: #5963A2;
+    border: none;
+    padding: 8px 35px;
+    color: #fff;
+    border-radius: 7px;
+    letter-spacing: 0.1em;
+    font-size: 1.6rem;
+}
+
+.form-btn input:hover, p a:hover, .btn a:hover {
+    opacity: .8;
+}
+
+/* 新規ユーザー確認画面 */
+.user-name {
+    font-size: 2.2rem;
+}
+
+.add-message {
+    margin: 50px 0;
+    text-align: center;
+}
+
+.add-message p:first-of-type {
+    margin-bottom: 10px;
+}
+
+.btn a {
+    background-color: #5963A2;
+    border: none;
+    padding: 8px 35px;
+    color: #fff;
+    border-radius: 7px;
+    letter-spacing: 0.1em;
+    font-size: 1.6rem;
 }
