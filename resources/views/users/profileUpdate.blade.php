@@ -28,7 +28,7 @@
         {{ Form::label('password','Password') }}
       </li>
       <li>
-        {!! Form::text('password',Str_repeat::limit('●●●●●●●●●●●●',$word_count,'' ),['readonly']) !!}
+        {!! Form::text('password',str_repeat('●',$word_count),['readonly']) !!}
       </li>
     </ul>
     <ul class="profile-list">
